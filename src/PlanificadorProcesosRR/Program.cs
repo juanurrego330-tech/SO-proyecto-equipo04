@@ -10,6 +10,7 @@ namespace PlanificadorProcesosRR
     {
         static void Main(string[] args)
         {
+            Console.WriteLine("Hola mundo");
         }
     }
 }
