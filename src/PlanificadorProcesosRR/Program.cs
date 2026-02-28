@@ -11,6 +11,8 @@ namespace PlanificadorProcesosRR
         static void Main(string[] args)
         {
             Console.WriteLine("Hola mundo");
+            Console.WriteLine("Prueba2");
+            Console.WriteLine("Prueba3");
         }
     }
 }
