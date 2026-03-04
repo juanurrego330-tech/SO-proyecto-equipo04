@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Threading;
-using Gestor_de_Procesos_y_Concurrencia;
+using static Gestor_de_Procesos_y_Concurrencia.Procesos;
 
 namespace Gestor_de_Procesos_y_Concurrencia
 {
@@ -34,8 +35,10 @@ namespace Gestor_de_Procesos_y_Concurrencia
 
         static void Main(string[] args)
         {
+            var clock = new SimulationClock();
 
             int cantidad = LeerEntero("Cantidad de procesos: ");
+            var procesos = new List<Proceso>();
 
             for (int i = 0; i < cantidad; i++)
             {
@@ -47,9 +50,31 @@ namespace Gestor_de_Procesos_y_Concurrencia
                 int arrival = LeerEntero("Arrival Time: ", true);
                 int burst = LeerEntero("Burst Time: ");
 
+                procesos.Add(new Proceso(id, arrival, burst));
             }
 
             int quantum = LeerEntero("\nQuantum: ");
+
+            var scheduler = new RoundRobinScheduler(procesos, quantum, clock);
+
+            Thread hilo = new Thread(scheduler.Ejecutar);
+            hilo.Start();
+
+            while (scheduler.Activo)
+            {
+                Console.Clear();
+                Console.WriteLine($"Tiempo: {clock.ObtenerTiempo()}");
+                Console.WriteLine("ID\tEstado\tRemaining");
+
+                foreach (var p in scheduler.ObtenerProcesos())
+                    Console.WriteLine($"{p.Id}\t{p.Estado}\t{p.RemainingTime}");
+
+                Thread.Sleep(500);
+            }
+
+            hilo.Join();
+            Console.WriteLine("\nSimulación terminada.");
+            Console.ReadLine();
         }
     }
 }
