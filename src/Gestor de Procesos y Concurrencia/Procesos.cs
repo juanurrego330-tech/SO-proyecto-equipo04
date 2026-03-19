@@ -143,6 +143,7 @@ namespace Gestor_de_Procesos_y_Concurrencia
                             {
                                 actual.Estado = EstadoProceso.TERMINATED;
 
+
                                 actual.CompletionTime = clock.ObtenerTiempo();
                                 actual.TurnaroundTime = actual.CompletionTime - actual.ArrivalTime;
                                 actual.WaitingTime = actual.TurnaroundTime - actual.BurstTime;

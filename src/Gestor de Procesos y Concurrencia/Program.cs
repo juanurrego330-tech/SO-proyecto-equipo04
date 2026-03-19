@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Threading;
 using static Gestor_de_Procesos_y_Concurrencia.Procesos;
 
@@ -74,6 +73,7 @@ namespace Gestor_de_Procesos_y_Concurrencia
 
             hilo.Join();
             Console.WriteLine("\nSimulación terminada.");
+            Console.ReadLine();
             Console.WriteLine("\nResultados finales:");
             Console.WriteLine("ID\tWT\tTAT\tCT");
 
