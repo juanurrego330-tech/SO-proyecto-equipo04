@@ -65,19 +65,19 @@ No requiere librerías externas.
 
 Funciona:
 
-Validación de entrada con TryParse.
-Creación de clases (Proceso, SimulationClock, RoundRobinScheduler).
-Simulación completa del algoritmo Round Robin con quantum configurable.
-Ejecución concurrente con hilos reales (Thread, lock, Monitor).
-Simulación de procesos con ciclo de vida completo (NEW → READY → RUNNING → TERMINATED).
-Manejo de ArrivalTime dinámico (los procesos llegan en distintos momentos).
-CPU idle cuando no hay procesos listos (el reloj sigue avanzando).
-Cálculo de métricas por proceso: WaitingTime, TurnaroundTime, CompletionTime.
-Cálculo de promedios globales de WT y TAT.
-Visualización en tiempo real del estado de cada proceso por consola.
+- Validación de entrada con TryParse.
+- Creación de clases (Proceso, SimulationClock, RoundRobinScheduler).
+- Simulación completa del algoritmo Round Robin con quantum configurable.
+- Ejecución concurrente con hilos reales (Thread, lock, Monitor).
+- Simulación de procesos con ciclo de vida completo (NEW → READY → RUNNING → TERMINATED).
+- Manejo de ArrivalTime dinámico (los procesos llegan en distintos momentos).
+- CPU idle cuando no hay procesos listos (el reloj sigue avanzando).
+- Cálculo de métricas por proceso: WaitingTime, TurnaroundTime, CompletionTime.
+- Cálculo de promedios globales de WT y TAT.
+- Visualización en tiempo real del estado de cada proceso por consola.
 
 No funciona / No implementado aún:
 
-Procesos en estado BLOCKED (no hay simulación de I/O ni esperas intermedias).
-Interfaz gráfica.
-Persistencia de datos (los resultados no se guardan en archivo ni base de datos).
+- Procesos en estado BLOCKED (no hay simulación de I/O ni esperas intermedias).
+- Interfaz gráfica.
+- Persistencia de datos (los resultados no se guardan en archivo ni base de datos).
