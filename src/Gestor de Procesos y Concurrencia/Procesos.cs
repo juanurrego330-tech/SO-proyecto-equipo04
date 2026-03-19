@@ -22,6 +22,9 @@ namespace Gestor_de_Procesos_y_Concurrencia
             public int BurstTime { get; set; }
             public int RemainingTime { get; set; }
             public EstadoProceso Estado { get; set; }
+            public int CompletionTime { get; set; }
+            public int TurnaroundTime { get; set; }
+            public int WaitingTime { get; set; }
 
             public Proceso(string id, int arrival, int burst)
             {
@@ -139,6 +142,10 @@ namespace Gestor_de_Procesos_y_Concurrencia
                             else
                             {
                                 actual.Estado = EstadoProceso.TERMINATED;
+
+                                actual.CompletionTime = clock.ObtenerTiempo();
+                                actual.TurnaroundTime = actual.CompletionTime - actual.ArrivalTime;
+                                actual.WaitingTime = actual.TurnaroundTime - actual.BurstTime;
                             }
                         }
                     }

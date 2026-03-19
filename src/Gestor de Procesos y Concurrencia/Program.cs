@@ -74,6 +74,21 @@ namespace Gestor_de_Procesos_y_Concurrencia
 
             hilo.Join();
             Console.WriteLine("\nSimulación terminada.");
+            Console.WriteLine("\nResultados finales:");
+            Console.WriteLine("ID\tWT\tTAT\tCT");
+
+            double totalWT = 0, totalTAT = 0;
+
+            foreach (var p in procesos)
+            {
+                Console.WriteLine($"{p.Id}\t{p.WaitingTime}\t{p.TurnaroundTime}\t{p.CompletionTime}");
+                totalWT += p.WaitingTime;
+                totalTAT += p.TurnaroundTime;
+            }
+
+            Console.WriteLine($"\nPromedio Waiting Time: {totalWT / procesos.Count}");
+            Console.WriteLine($"Promedio Turnaround Time: {totalTAT / procesos.Count}");
+
             Console.ReadLine();
         }
     }
