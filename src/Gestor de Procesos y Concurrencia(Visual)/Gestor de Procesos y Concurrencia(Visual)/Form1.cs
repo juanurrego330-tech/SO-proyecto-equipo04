@@ -76,33 +76,40 @@ namespace Gestor_de_Procesos_y_Concurrencia_Visual_
         public void GuardarDatosProceso()
         {
             string[] Proceso = new string[4];
-            Proceso[0] = textBox3.Text;
-            Proceso[1] = "Arrival Time: " + textBox4.Text;
-            Proceso[2] = "Burst Time: " + textBox5.Text;
-            listBox1.Items.Add(Proceso);
+            Proceso[0] = "#" + contadorProcesos;
+            Proceso[1] = textBox3.Text;
+            Proceso[2] = textBox4.Text;
+            Proceso[3] = textBox5.Text;
+            listaProcesos.Add(Proceso);
         }
-        /*
-        int id = contadorProcesos;
-        int tiempoLlegada = int.Parse(textBox3.Text);
-        int rafaga = int.Parse(textBox4.Text);
-        int prioridad = int.Parse(textBox5.Text);
-        Proceso nuevoProceso = new Proceso(id, tiempoLlegada, rafaga, prioridad);
-        listBox1.Items.Add(nuevoProceso);
-        contadorProcesos++;
-        */
+
+        public void mostrarDatosProcesos()
+        {
+            dataGridView1.Rows.Clear();
+            foreach (string[] a in listaProcesos)
+            {
+                dataGridView1.Rows.Add(a);
+            }
+        }
         private void button2_Click(object sender, EventArgs e)
         {
             if (ValidarCampos(textBox3.Text) && ValidarCampos(textBox4.Text) && ValidarCampos(textBox5.Text))
             {
                 if (ValidarNumerosIngresoDatos())
                 {
-                    contadorProcesos++;
-                    limpiarCampos();
-                    if (contadorProcesos > numeroProcesos)
+                    GuardarDatosProceso();
+
+                    if (contadorProcesos >= numeroProcesos)
                     {                        
                         cambioPermitido = true;
                         tabControl1.SelectedTab = tabPage3;
                         cambioPermitido = false;
+                        mostrarDatosProcesos();
+                    }
+                    else 
+                    {
+                    contadorProcesos++;
+                    limpiarCampos();
                     }
                 }
             }
