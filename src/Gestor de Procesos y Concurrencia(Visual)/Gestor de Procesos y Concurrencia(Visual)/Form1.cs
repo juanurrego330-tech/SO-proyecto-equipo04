@@ -100,16 +100,16 @@ namespace Gestor_de_Procesos_y_Concurrencia_Visual_
                     GuardarDatosProceso();
 
                     if (contadorProcesos >= numeroProcesos)
-                    {                        
+                    {
                         cambioPermitido = true;
                         tabControl1.SelectedTab = tabPage3;
                         cambioPermitido = false;
                         mostrarDatosProcesos();
                     }
-                    else 
+                    else
                     {
-                    contadorProcesos++;
-                    limpiarCampos();
+                        contadorProcesos++;
+                        limpiarCampos();
                     }
                 }
             }
@@ -121,6 +121,11 @@ namespace Gestor_de_Procesos_y_Concurrencia_Visual_
             {
                 e.Cancel = true;
             }
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
