@@ -76,7 +76,7 @@
             label1.BackColor = SystemColors.ActiveCaptionText;
             label1.Font = new Font("Segoe UI", 14F);
             label1.ForeColor = SystemColors.ButtonHighlight;
-            label1.Location = new Point(229, 264);
+            label1.Location = new Point(229, 274);
             label1.Name = "label1";
             label1.Size = new Size(349, 32);
             label1.TabIndex = 0;
@@ -89,7 +89,7 @@
             label2.BackColor = SystemColors.ActiveCaptionText;
             label2.Font = new Font("Segoe UI", 14F);
             label2.ForeColor = SystemColors.ButtonHighlight;
-            label2.Location = new Point(248, 315);
+            label2.Location = new Point(248, 325);
             label2.Name = "label2";
             label2.Size = new Size(330, 32);
             label2.TabIndex = 1;
@@ -98,7 +98,7 @@
             // textBox1
             // 
             textBox1.Anchor = AnchorStyles.None;
-            textBox1.Location = new Point(584, 269);
+            textBox1.Location = new Point(584, 279);
             textBox1.Name = "textBox1";
             textBox1.Size = new Size(100, 27);
             textBox1.TabIndex = 2;
@@ -106,7 +106,7 @@
             // textBox2
             // 
             textBox2.Anchor = AnchorStyles.None;
-            textBox2.Location = new Point(584, 320);
+            textBox2.Location = new Point(584, 330);
             textBox2.Name = "textBox2";
             textBox2.Size = new Size(100, 27);
             textBox2.TabIndex = 3;
@@ -114,7 +114,7 @@
             // button1
             // 
             button1.Anchor = AnchorStyles.None;
-            button1.Location = new Point(584, 376);
+            button1.Location = new Point(584, 386);
             button1.Name = "button1";
             button1.Size = new Size(100, 28);
             button1.TabIndex = 4;
@@ -129,7 +129,7 @@
             tabControl1.Controls.Add(tabPage3);
             tabControl1.Controls.Add(tabPage4);
             tabControl1.Dock = DockStyle.Fill;
-            tabControl1.ItemSize = new Size(140, 20);
+            tabControl1.ItemSize = new Size(0, 1);
             tabControl1.Location = new Point(0, 0);
             tabControl1.Name = "tabControl1";
             tabControl1.SelectedIndex = 0;
@@ -149,10 +149,10 @@
             tabPage1.Controls.Add(textBox2);
             tabPage1.Controls.Add(textBox1);
             tabPage1.Font = new Font("Segoe UI", 9F);
-            tabPage1.Location = new Point(4, 24);
+            tabPage1.Location = new Point(4, 5);
             tabPage1.Name = "tabPage1";
             tabPage1.Padding = new Padding(3);
-            tabPage1.Size = new Size(1054, 645);
+            tabPage1.Size = new Size(1054, 664);
             tabPage1.TabIndex = 0;
             tabPage1.Text = "Inicio";
             // 
