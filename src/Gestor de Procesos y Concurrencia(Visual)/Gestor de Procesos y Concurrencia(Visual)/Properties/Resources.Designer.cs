@@ -59,5 +59,25 @@ namespace Gestor_de_Procesos_y_Concurrencia_Visual_.Properties {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap image_9e753044 {
+            get {
+                object obj = ResourceManager.GetObject("image_9e753044", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap image_f91d0cc6 {
+            get {
+                object obj = ResourceManager.GetObject("image_f91d0cc6", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
     }
 }
