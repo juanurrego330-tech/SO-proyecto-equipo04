@@ -55,9 +55,9 @@ namespace Gestor_de_Procesos_y_Concurrencia_Visual_
         public void mostrarDatosProcesos(DataGridView D, List<Procesos> P)
         {
             D.Rows.Clear();
-            foreach (Procesos a in P)
+            foreach (Procesos b in P)
             {
-                D.Rows.Add(a.numeroProceso, a.identificador, a.ArrivalTime, a.BursTime);
+                D.Rows.Add(b.NumeroProceso, b.Identificador, b.ArrivalTime, b.BurstTime);
             }
         }
     }

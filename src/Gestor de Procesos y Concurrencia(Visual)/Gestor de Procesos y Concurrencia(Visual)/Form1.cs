@@ -1,6 +1,8 @@
 using Microsoft.VisualBasic.Devices;
 using System.Reflection;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using System.Drawing;
+using Microsoft.Data.SqlClient;
 
 namespace Gestor_de_Procesos_y_Concurrencia_Visual_
 {
@@ -14,14 +16,14 @@ namespace Gestor_de_Procesos_y_Concurrencia_Visual_
         private int numeroProcesos;
         private int contadorProcesos = 1;
         private bool cambioPermitido = false;
-        private int relojGlobal = 0;
-        private List<string[]> listaProcesos = new List<string[]>();
-        private List<Procesos> listaProcesos2 = new List<Procesos>();
-        private readonly object cpuLock = new object();
-        private Queue<int> colaListos = new Queue<int>();
-        private readonly object queueLock = new object();
+
+        private List<Procesos> listaProcesos = new List<Procesos>();
+        private RoundRobin planificadorRoundRobin;
         Archivo Logs = new Archivo();
         Utilidades V = new Utilidades();
+        private int relojGlobal = 0;
+
+
         private void tabControl1_Selecting(object sender, TabControlCancelEventArgs e)
         {
             if (!cambioPermitido)
@@ -50,14 +52,13 @@ namespace Gestor_de_Procesos_y_Concurrencia_Visual_
             {
                 if (V.ValidarNumerosIngresoDatos(textBox4.Text, textBox5.Text))
                 {
-                    listaProcesos2.Add(new Procesos(contadorProcesos, textBox3.Text, textBox4.Text, textBox5.Text));
-
+                    listaProcesos.Add(new Procesos(contadorProcesos, textBox3.Text, int.Parse(textBox4.Text), int.Parse(textBox5.Text), 0));
                     if (contadorProcesos >= numeroProcesos)
                     {
                         cambioPermitido = true;
                         tabControl1.SelectedTab = tabPage3;
                         cambioPermitido = false;
-                        V.mostrarDatosProcesos(dataGridView1, listaProcesos2);
+                        V.mostrarDatosProcesos(dataGridView1, listaProcesos);
                     }
                     else
                     {
@@ -70,140 +71,81 @@ namespace Gestor_de_Procesos_y_Concurrencia_Visual_
                 }
             }
         }
-
-
-
         private void button3_Click(object sender, EventArgs e)
         {
             cambioPermitido = true;
             tabControl1.SelectedTab = tabPage4;
             cambioPermitido = false;
             Logs.DestruirArchivo();
-
             dataGridView2.Rows.Clear();
             foreach (var a in listaProcesos)
             {
-                dataGridView2.Rows.Add(a[0], a[1], a[2], a[3], "ESPERANDO ARRIVAL", "0%");
+                a.Estado = "ESPERANDO ARRIVAL";
+                dataGridView2.Rows.Add(a.NumeroProceso, a.Identificador, a.ArrivalTime, a.BurstTime, a.Estado, "0%");
             }
 
             button4.Visible = false;
-
-            Thread director = new Thread(() =>
+            button6.Visible = false;
+            planificadorRoundRobin = new RoundRobin(listaProcesos, quantum, Logs, V);
+            planificadorRoundRobin.OnActualizarUI += ActualizarFilasTabla;
+            planificadorRoundRobin.OnSimulacionTerminada += () =>
             {
-                relojGlobal = 0;
-                int procesosAdmitidos = 0;
-                List<Thread> hilosProcesos = new List<Thread>();
+                this.Invoke(new Action(() => button4.Visible = true));
+                this.Invoke(new Action(() => button6.Visible = true));
+            };
 
-                while (procesosAdmitidos < listaProcesos.Count || hilosProcesos.Any(h => h.IsAlive))
-                {
-                    for (int i = 0; i < listaProcesos.Count; i++)
-                    {
-                        int arrival = int.Parse(listaProcesos[i][2]);
-                        string estadoActual = "";
-
-                        this.Invoke(new Action(() =>
-                        {
-                            if (dataGridView2.Rows[i].Cells[4].Value != null)
-                                estadoActual = dataGridView2.Rows[i].Cells[4].Value.ToString();
-                        }));
-
-                        if (estadoActual == "ESPERANDO ARRIVAL" && arrival <= relojGlobal)
-                        {
-                            int index = i;
-                            string nombre = listaProcesos[i][0];
-                            int burst = int.Parse(listaProcesos[i][3]);
-                            lock (queueLock)
-                            {
-                                colaListos.Enqueue(index);
-                            }
-                            Thread h = new Thread(() => LogicaProceso(index, nombre, burst));
-                            h.IsBackground = true;
-                            hilosProcesos.Add(h);
-                            h.Start();
-
-                            procesosAdmitidos++;
-                            Logs.SysCall_WriteLog($"ADMISIÓN: PROCESO {nombre} entró al sistema en T={relojGlobal}.");
-                        }
-                    }
-
-                    Thread.Sleep(1000);
-                    relojGlobal++;
-                }
-
-                this.Invoke(new Action(() =>
-                {
-                    button4.Visible = true;
-                }));
-            });
-
-            director.Start();
+            planificadorRoundRobin.Iniciar();
         }
-        private void LogicaProceso(int fila, string nombreID, int burst)
+        private void ActualizarFilasTabla(int fila, string estado, Color color, int progreso)
         {
-            int tiempoRestante = burst;
+            dataGridView2.Rows[fila].Cells[4].Value = estado;
+            dataGridView2.Rows[fila].Cells[5].Value = progreso + "%";
+            dataGridView2.Rows[fila].DefaultCellStyle.BackColor = color;
+        }
+        private void CalcularYMostrarEstadisticas()
+        {
+            dataGridView3.Rows.Clear();
 
-            while (tiempoRestante > 0)
+            double sumaT = 0, sumaW = 0, sumaR = 0;
+
+            string connectionString = "Server=LAPTOP-BS0QDBE1;Database=GestorProcesosDB;Trusted_Connection=True;";
+
+            foreach (var p in listaProcesos)
             {
-                bool miTurno = false;
-                while (!miTurno)
+                int turnaround = p.FinishTime - p.ArrivalTime;
+                int espera = turnaround - p.BurstTime;
+                int respuesta = p.FirstRunTime - p.ArrivalTime;
+
+                sumaT += turnaround;
+                sumaW += espera;
+                sumaR += respuesta;
+
+                dataGridView3.Rows.Add(
+                    p.Identificador,
+                    $"{p.MemoriaUsada} KB",
+                    $"{turnaround} s",
+                    $"{espera} s",
+                    $"{respuesta} s"
+                );
+
+                try
                 {
-                    lock (queueLock)
-                    {
-                        if (colaListos.Count > 0 && colaListos.Peek() == fila)
-                            miTurno = true;
-                    }
-                    if (!miTurno)
-                    {
-                        ActualizarUI(fila, "LISTO (Ready)", Color.Orange, V.CalcularPorcentaje(burst, tiempoRestante));
-                        Thread.Sleep(100);
-                    }
-                }
-
-                lock (cpuLock)
-                {
-                    int aEjecutar = Math.Min(tiempoRestante, quantum);
-                    Logs.SysCall_WriteLog($"KERNEL: {nombreID} inicia ráfaga de {aEjecutar}s.");
-
-                    for (int i = 0; i < aEjecutar; i++)
-                    {
-                        ActualizarUI(fila, "EJECUCIÓN (Running)", Color.LightGreen, V.CalcularPorcentaje(burst, tiempoRestante));
-                        Thread.Sleep(600);
-                        tiempoRestante--;
-                        ActualizarUI(fila, "EJECUCIÓN (Running)", Color.LightGreen, V.CalcularPorcentaje(burst, tiempoRestante));
-                    }
-                }
-
-                lock (queueLock)
-                {
-                    if (colaListos.Count > 0 && colaListos.Peek() == fila)
-                    {
-                        colaListos.Dequeue();
-                    }
-
-                    if (tiempoRestante > 0)
-                    {
-                        colaListos.Enqueue(fila);
-                        ActualizarUI(fila, "LISTO (Ready)", Color.Orange, V.CalcularPorcentaje(burst, tiempoRestante));
-                        Logs.SysCall_WriteLog($"SISTEMA: {nombreID} suspendido (le faltan {tiempoRestante}s).");
-                    }
-                }
-                Thread.Sleep(200);
+                    SqlConnection conexion = new SqlConnection();
+                    string comando = $"INSERT INTO HistoricoProcesos (ProcesoId, BurstTime, ArrivalTime, MemoriaKB, Turnaround, Espera, Respuesta)" +
+                    $" VALUES ({p.Identificador}, {p.BurstTime}, {p.ArrivalTime}, {p.MemoriaUsada}, {turnaround}, {espera}, {respuesta})";
+                    SqlCommand comandoSql = new SqlCommand(comando, conexion);
+                    conexion.Open();
+                    comandoSql.ExecuteNonQuery();
+                    conexion.Close();
+                } catch { }
             }
 
-            ActualizarUI(fila, "TERMINADO", Color.LightGray, 100);
-            Logs.SysCall_WriteLog($"SISTEMA: {nombreID} terminó.");
-        }
-        private void ActualizarUI(int fila, string estado, Color color, int progreso)
-        {
-            if (dataGridView2.InvokeRequired)
-            {
-                dataGridView2.Invoke(new Action(() =>
-                {
-                    dataGridView2.Rows[fila].Cells[4].Value = estado;
-                    dataGridView2.Rows[fila].Cells[5].Value = progreso + "%";
-                    dataGridView2.Rows[fila].DefaultCellStyle.BackColor = color;
-                }));
-            }
+            double promT = sumaT / listaProcesos.Count;
+            double promW = sumaW / listaProcesos.Count;
+            double promR = sumaR / listaProcesos.Count;
+
+            dataGridView3.Rows.Add("PROMEDIOS", "-", $"{promT:F2} s", $"{promW:F2} s", $"{promR:F2} s");
+            dataGridView3.Rows[dataGridView3.Rows.Count - 1].DefaultCellStyle.BackColor = Color.LightCyan;
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -215,12 +157,43 @@ namespace Gestor_de_Procesos_y_Concurrencia_Visual_
         {
             numeroProcesos = 0;
             quantum = 0;
-            listaProcesos2.Clear();
+            listaProcesos.Clear();
             contadorProcesos = 1;
             label3.Text = "Proceso #1";
             cambioPermitido = true;
             tabControl1.SelectedTab = tabPage1;
             cambioPermitido = false;
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            CalcularYMostrarEstadisticas();
+            cambioPermitido = true;
+            tabControl1.SelectedTab = tabPage5;
+            cambioPermitido = false;
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            cambioPermitido = true;
+            tabControl1.SelectedTab = tabPage1;
+            cambioPermitido = false;
+        }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+            listaProcesos.Clear();
+            dataGridView2.Rows.Clear();
+        }
+
+        private void button10_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
         }
     }
 }

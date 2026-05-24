@@ -6,18 +6,26 @@ namespace Gestor_de_Procesos_y_Concurrencia_Visual_
 {
     internal class Procesos
     {
-        public int valorQuantum { get; set; }
-        public int numeroProceso { get; set; }
-        public string identificador { get; set; }
+        public int NumeroProceso { get; set; }
+        public string Identificador { get; set; }
         public int ArrivalTime { get; set; }
-        public int BursTime { get; set; }
+        public int BurstTime { get; set; }
+        public int TiempoRestante { get; set; }
+        public int MemoriaRAM { get; set; }
+        public string Estado { get; set; } = "ESPERANDO ARRIVAL";
+        public int FirstRunTime { get; set; } = -1;
+        public int FinishTime { get; set; }
+        public long MemoriaUsada { get; set; }
 
-        public Procesos(int numeroP, string ID, string AT, string BT)
+        public Procesos(int numero, string id, int arrival, int burst, int ram)
         {
-            numeroProceso = numeroP;
-            identificador = ID;
-            ArrivalTime = int.Parse(AT);
-            BursTime = int.Parse(BT);
+            NumeroProceso = numero;
+            Identificador = id;
+            ArrivalTime = arrival;
+            BurstTime = burst;
+            TiempoRestante = burst;
+            MemoriaRAM = ram;
+            Estado = "ESPERANDO";
         }
     }
 }
