@@ -36,6 +36,8 @@
             DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle6 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle7 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle8 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle9 = new DataGridViewCellStyle();
             label1 = new Label();
             label2 = new Label();
             textBox1 = new TextBox();
@@ -43,6 +45,7 @@
             button1 = new Button();
             tabControl1 = new TabControl();
             tabPage1 = new TabPage();
+            button11 = new Button();
             button10 = new Button();
             button9 = new Button();
             tabPage2 = new TabPage();
@@ -77,7 +80,7 @@
             button7 = new Button();
             dataGridView3 = new DataGridView();
             PROCESO = new DataGridViewTextBoxColumn();
-            MEMORIA_USADA = new DataGridViewTextBoxColumn();
+            MEMORIA = new DataGridViewTextBoxColumn();
             RETORNO = new DataGridViewTextBoxColumn();
             ESPERA = new DataGridViewTextBoxColumn();
             RESPUESTA = new DataGridViewTextBoxColumn();
@@ -99,7 +102,7 @@
             label1.BackColor = Color.Transparent;
             label1.Font = new Font("Segoe UI", 35F);
             label1.ForeColor = Color.Black;
-            label1.Location = new Point(270, 295);
+            label1.Location = new Point(259, 435);
             label1.Name = "label1";
             label1.Size = new Size(851, 78);
             label1.TabIndex = 0;
@@ -112,7 +115,7 @@
             label2.BackColor = Color.Transparent;
             label2.Font = new Font("Segoe UI", 35F);
             label2.ForeColor = Color.Black;
-            label2.Location = new Point(322, 373);
+            label2.Location = new Point(311, 513);
             label2.Name = "label2";
             label2.Size = new Size(799, 78);
             label2.TabIndex = 1;
@@ -123,7 +126,7 @@
             textBox1.Anchor = AnchorStyles.None;
             textBox1.BorderStyle = BorderStyle.FixedSingle;
             textBox1.Font = new Font("Segoe UI", 25F);
-            textBox1.Location = new Point(1110, 309);
+            textBox1.Location = new Point(1099, 449);
             textBox1.MaxLength = 4;
             textBox1.Name = "textBox1";
             textBox1.Size = new Size(102, 63);
@@ -134,7 +137,7 @@
             textBox2.Anchor = AnchorStyles.None;
             textBox2.BorderStyle = BorderStyle.FixedSingle;
             textBox2.Font = new Font("Segoe UI", 25F);
-            textBox2.Location = new Point(1110, 387);
+            textBox2.Location = new Point(1099, 527);
             textBox2.MaxLength = 4;
             textBox2.Name = "textBox2";
             textBox2.Size = new Size(102, 63);
@@ -146,7 +149,7 @@
             button1.BackColor = Color.White;
             button1.FlatStyle = FlatStyle.Flat;
             button1.Font = new Font("Segoe UI", 18F);
-            button1.Location = new Point(1038, 507);
+            button1.Location = new Point(1027, 647);
             button1.Name = "button1";
             button1.Size = new Size(225, 83);
             button1.TabIndex = 2;
@@ -166,9 +169,9 @@
             tabControl1.Location = new Point(0, 0);
             tabControl1.Name = "tabControl1";
             tabControl1.SelectedIndex = 0;
-            tabControl1.Size = new Size(1924, 753);
+            tabControl1.Size = new Size(1902, 1033);
             tabControl1.SizeMode = TabSizeMode.FillToRight;
-            tabControl1.TabIndex = 5;
+            tabControl1.TabIndex = 0;
             tabControl1.Selecting += tabControl1_Selecting;
             // 
             // tabPage1
@@ -176,6 +179,7 @@
             tabPage1.BackColor = Color.Transparent;
             tabPage1.BackgroundImage = (Image)resources.GetObject("tabPage1.BackgroundImage");
             tabPage1.BackgroundImageLayout = ImageLayout.Stretch;
+            tabPage1.Controls.Add(button11);
             tabPage1.Controls.Add(button10);
             tabPage1.Controls.Add(button9);
             tabPage1.Controls.Add(textBox2);
@@ -187,9 +191,24 @@
             tabPage1.Location = new Point(4, 14);
             tabPage1.Name = "tabPage1";
             tabPage1.Padding = new Padding(3);
-            tabPage1.Size = new Size(1916, 735);
+            tabPage1.Size = new Size(1894, 1015);
             tabPage1.TabIndex = 0;
             tabPage1.Text = "Inicio";
+            // 
+            // button11
+            // 
+            button11.Anchor = AnchorStyles.None;
+            button11.BackColor = Color.White;
+            button11.FlatStyle = FlatStyle.Flat;
+            button11.Font = new Font("Segoe UI", 15F);
+            button11.ForeColor = Color.Black;
+            button11.Location = new Point(1449, 663);
+            button11.Name = "button11";
+            button11.Size = new Size(271, 83);
+            button11.TabIndex = 5;
+            button11.Text = "MOSTRAR REGISTROS SIMULACION";
+            button11.UseVisualStyleBackColor = false;
+            button11.Click += button11_Click;
             // 
             // button10
             // 
@@ -197,7 +216,7 @@
             button10.BackColor = Color.White;
             button10.FlatStyle = FlatStyle.Flat;
             button10.Font = new Font("Segoe UI", 18F);
-            button10.Location = new Point(1038, 612);
+            button10.Location = new Point(1027, 752);
             button10.Name = "button10";
             button10.Size = new Size(225, 83);
             button10.TabIndex = 4;
@@ -212,7 +231,7 @@
             button9.FlatStyle = FlatStyle.Flat;
             button9.Font = new Font("Segoe UI", 15F);
             button9.ForeColor = Color.Black;
-            button9.Location = new Point(1457, 507);
+            button9.Location = new Point(1449, 752);
             button9.Name = "button9";
             button9.Size = new Size(271, 83);
             button9.TabIndex = 3;
@@ -223,7 +242,8 @@
             // tabPage2
             // 
             tabPage2.BackColor = Color.White;
-            tabPage2.BackgroundImageLayout = ImageLayout.Stretch;
+            tabPage2.BackgroundImage = (Image)resources.GetObject("tabPage2.BackgroundImage");
+            tabPage2.BackgroundImageLayout = ImageLayout.Zoom;
             tabPage2.Controls.Add(button5);
             tabPage2.Controls.Add(textBox5);
             tabPage2.Controls.Add(textBox4);
@@ -236,7 +256,7 @@
             tabPage2.Location = new Point(4, 14);
             tabPage2.Name = "tabPage2";
             tabPage2.Padding = new Padding(3);
-            tabPage2.Size = new Size(1916, 735);
+            tabPage2.Size = new Size(1894, 1015);
             tabPage2.TabIndex = 1;
             tabPage2.Text = "Ingreso Datos";
             // 
@@ -246,7 +266,7 @@
             button5.BackColor = Color.White;
             button5.FlatStyle = FlatStyle.Flat;
             button5.Font = new Font("Segoe UI", 18F);
-            button5.Location = new Point(869, 569);
+            button5.Location = new Point(858, 709);
             button5.Name = "button5";
             button5.Size = new Size(171, 68);
             button5.TabIndex = 10;
@@ -259,7 +279,7 @@
             textBox5.Anchor = AnchorStyles.None;
             textBox5.BorderStyle = BorderStyle.FixedSingle;
             textBox5.Font = new Font("Segoe UI", 25F);
-            textBox5.Location = new Point(858, 398);
+            textBox5.Location = new Point(847, 538);
             textBox5.MaxLength = 8;
             textBox5.Name = "textBox5";
             textBox5.Size = new Size(196, 63);
@@ -270,7 +290,7 @@
             textBox4.Anchor = AnchorStyles.None;
             textBox4.BorderStyle = BorderStyle.FixedSingle;
             textBox4.Font = new Font("Segoe UI", 25F);
-            textBox4.Location = new Point(858, 318);
+            textBox4.Location = new Point(847, 458);
             textBox4.MaxLength = 8;
             textBox4.Name = "textBox4";
             textBox4.Size = new Size(196, 63);
@@ -281,7 +301,7 @@
             textBox3.Anchor = AnchorStyles.None;
             textBox3.BorderStyle = BorderStyle.FixedSingle;
             textBox3.Font = new Font("Segoe UI", 25F);
-            textBox3.Location = new Point(858, 240);
+            textBox3.Location = new Point(847, 380);
             textBox3.MaxLength = 11;
             textBox3.Name = "textBox3";
             textBox3.Size = new Size(270, 63);
@@ -293,7 +313,7 @@
             button2.BackColor = Color.White;
             button2.FlatStyle = FlatStyle.Flat;
             button2.Font = new Font("Segoe UI", 18F);
-            button2.Location = new Point(869, 495);
+            button2.Location = new Point(858, 635);
             button2.Name = "button2";
             button2.Size = new Size(171, 68);
             button2.TabIndex = 9;
@@ -308,7 +328,7 @@
             label6.BackColor = Color.White;
             label6.Font = new Font("Segoe UI", 40F);
             label6.ForeColor = Color.Black;
-            label6.Location = new Point(498, 375);
+            label6.Location = new Point(487, 515);
             label6.Name = "label6";
             label6.Size = new Size(365, 89);
             label6.TabIndex = 3;
@@ -321,7 +341,7 @@
             label5.BackColor = Color.White;
             label5.Font = new Font("Segoe UI", 40F);
             label5.ForeColor = Color.Black;
-            label5.Location = new Point(461, 295);
+            label5.Location = new Point(450, 435);
             label5.Name = "label5";
             label5.Size = new Size(402, 89);
             label5.TabIndex = 2;
@@ -334,7 +354,7 @@
             label4.BackColor = Color.White;
             label4.Font = new Font("Segoe UI", 40F);
             label4.ForeColor = Color.Black;
-            label4.Location = new Point(745, 217);
+            label4.Location = new Point(734, 357);
             label4.Name = "label4";
             label4.Size = new Size(118, 89);
             label4.TabIndex = 1;
@@ -344,10 +364,10 @@
             // 
             label3.Anchor = AnchorStyles.None;
             label3.AutoSize = true;
-            label3.BackColor = Color.White;
+            label3.BackColor = Color.Transparent;
             label3.Font = new Font("Segoe UI", 40F);
             label3.ForeColor = Color.Black;
-            label3.Location = new Point(498, 128);
+            label3.Location = new Point(487, 268);
             label3.Name = "label3";
             label3.Size = new Size(365, 89);
             label3.TabIndex = 0;
@@ -356,11 +376,13 @@
             // tabPage3
             // 
             tabPage3.BackColor = Color.Black;
+            tabPage3.BackgroundImage = (Image)resources.GetObject("tabPage3.BackgroundImage");
+            tabPage3.BackgroundImageLayout = ImageLayout.Stretch;
             tabPage3.Controls.Add(button3);
             tabPage3.Controls.Add(dataGridView1);
             tabPage3.Location = new Point(4, 14);
             tabPage3.Name = "tabPage3";
-            tabPage3.Size = new Size(1916, 735);
+            tabPage3.Size = new Size(1894, 1015);
             tabPage3.TabIndex = 2;
             tabPage3.Text = "Datos Ingresados";
             // 
@@ -371,7 +393,7 @@
             button3.FlatStyle = FlatStyle.Flat;
             button3.Font = new Font("Segoe UI", 20F);
             button3.ForeColor = Color.Black;
-            button3.Location = new Point(1621, 275);
+            button3.Location = new Point(1594, 380);
             button3.Name = "button3";
             button3.Size = new Size(265, 109);
             button3.TabIndex = 1;
@@ -405,6 +427,7 @@
             dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
             dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
             dataGridView1.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridView1.Enabled = false;
             dataGridView1.Location = new Point(0, 0);
             dataGridView1.Name = "dataGridView1";
             dataGridViewCellStyle3.BackColor = SystemColors.Control;
@@ -416,7 +439,7 @@
             dataGridView1.RowHeadersVisible = false;
             dataGridView1.RowHeadersWidth = 50;
             dataGridView1.RowTemplate.Height = 60;
-            dataGridView1.Size = new Size(1560, 735);
+            dataGridView1.Size = new Size(1560, 1015);
             dataGridView1.TabIndex = 0;
             // 
             // Column1
@@ -450,12 +473,14 @@
             // tabPage4
             // 
             tabPage4.BackColor = Color.Black;
+            tabPage4.BackgroundImage = (Image)resources.GetObject("tabPage4.BackgroundImage");
+            tabPage4.BackgroundImageLayout = ImageLayout.Stretch;
             tabPage4.Controls.Add(button6);
             tabPage4.Controls.Add(button4);
             tabPage4.Controls.Add(dataGridView2);
             tabPage4.Location = new Point(4, 14);
             tabPage4.Name = "tabPage4";
-            tabPage4.Size = new Size(1916, 735);
+            tabPage4.Size = new Size(1894, 1015);
             tabPage4.TabIndex = 3;
             tabPage4.Text = "Ejecucion";
             // 
@@ -463,10 +488,10 @@
             // 
             button6.BackColor = Color.White;
             button6.FlatStyle = FlatStyle.Flat;
-            button6.Font = new Font("Segoe UI", 16F);
-            button6.Location = new Point(1621, 223);
+            button6.Font = new Font("Segoe UI", 20F);
+            button6.Location = new Point(1619, 380);
             button6.Name = "button6";
-            button6.Size = new Size(186, 101);
+            button6.Size = new Size(225, 100);
             button6.TabIndex = 3;
             button6.Text = "CONTINUAR";
             button6.UseVisualStyleBackColor = false;
@@ -476,12 +501,12 @@
             // 
             button4.BackColor = Color.White;
             button4.FlatStyle = FlatStyle.Flat;
-            button4.Font = new Font("Segoe UI", 18F);
-            button4.Location = new Point(1621, 347);
+            button4.Font = new Font("Segoe UI", 20F);
+            button4.Location = new Point(1619, 506);
             button4.Name = "button4";
-            button4.Size = new Size(186, 101);
+            button4.Size = new Size(225, 100);
             button4.TabIndex = 2;
-            button4.Text = "Reiniciar";
+            button4.Text = "REINICIAR";
             button4.UseVisualStyleBackColor = false;
             button4.Click += button4_Click;
             // 
@@ -512,6 +537,7 @@
             dataGridViewCellStyle5.SelectionForeColor = SystemColors.HighlightText;
             dataGridViewCellStyle5.WrapMode = DataGridViewTriState.False;
             dataGridView2.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridView2.Enabled = false;
             dataGridView2.Location = new Point(0, 0);
             dataGridView2.Name = "dataGridView2";
             dataGridViewCellStyle6.Alignment = DataGridViewContentAlignment.MiddleLeft;
@@ -525,7 +551,7 @@
             dataGridView2.RowHeadersVisible = false;
             dataGridView2.RowHeadersWidth = 51;
             dataGridView2.RowTemplate.Height = 60;
-            dataGridView2.Size = new Size(1560, 735);
+            dataGridView2.Size = new Size(1560, 1015);
             dataGridView2.TabIndex = 0;
             // 
             // Column5
@@ -569,38 +595,42 @@
             // 
             // tabPage5
             // 
+            tabPage5.BackgroundImage = (Image)resources.GetObject("tabPage5.BackgroundImage");
+            tabPage5.BackgroundImageLayout = ImageLayout.Stretch;
             tabPage5.Controls.Add(button8);
             tabPage5.Controls.Add(button7);
             tabPage5.Controls.Add(dataGridView3);
             tabPage5.Location = new Point(4, 14);
             tabPage5.Name = "tabPage5";
-            tabPage5.Size = new Size(1916, 735);
+            tabPage5.Size = new Size(1894, 1015);
             tabPage5.TabIndex = 4;
             tabPage5.Text = "Resultados";
             tabPage5.UseVisualStyleBackColor = true;
             // 
             // button8
             // 
+            button8.BackColor = Color.White;
             button8.FlatStyle = FlatStyle.Flat;
-            button8.Font = new Font("Segoe UI", 15F);
-            button8.Location = new Point(1645, 433);
+            button8.Font = new Font("Segoe UI", 20F);
+            button8.Location = new Point(1592, 493);
             button8.Name = "button8";
-            button8.Size = new Size(252, 91);
+            button8.Size = new Size(273, 91);
             button8.TabIndex = 2;
             button8.Text = "SALIR";
-            button8.UseVisualStyleBackColor = true;
+            button8.UseVisualStyleBackColor = false;
             button8.Click += button8_Click;
             // 
             // button7
             // 
+            button7.BackColor = Color.White;
             button7.FlatStyle = FlatStyle.Flat;
-            button7.Font = new Font("Segoe UI", 15F);
-            button7.Location = new Point(1645, 336);
+            button7.Font = new Font("Segoe UI", 18F);
+            button7.Location = new Point(1592, 383);
             button7.Name = "button7";
-            button7.Size = new Size(252, 91);
+            button7.Size = new Size(273, 91);
             button7.TabIndex = 1;
             button7.Text = "VOLVER AL INICIO";
-            button7.UseVisualStyleBackColor = true;
+            button7.UseVisualStyleBackColor = false;
             button7.Click += button7_Click;
             // 
             // dataGridView3
@@ -612,21 +642,39 @@
             dataGridView3.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             dataGridView3.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dataGridView3.BackgroundColor = Color.White;
-            dataGridViewCellStyle7.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle7.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle7.BackColor = SystemColors.Control;
-            dataGridViewCellStyle7.Font = new Font("Segoe UI", 20F);
+            dataGridViewCellStyle7.Font = new Font("Segoe UI", 25F);
             dataGridViewCellStyle7.ForeColor = SystemColors.WindowText;
             dataGridViewCellStyle7.SelectionBackColor = SystemColors.Highlight;
             dataGridViewCellStyle7.SelectionForeColor = SystemColors.HighlightText;
             dataGridViewCellStyle7.WrapMode = DataGridViewTriState.True;
             dataGridView3.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
             dataGridView3.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView3.Columns.AddRange(new DataGridViewColumn[] { PROCESO, MEMORIA_USADA, RETORNO, ESPERA, RESPUESTA });
-            dataGridView3.Location = new Point(0, 3);
+            dataGridView3.Columns.AddRange(new DataGridViewColumn[] { PROCESO, MEMORIA, RETORNO, ESPERA, RESPUESTA });
+            dataGridViewCellStyle8.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle8.BackColor = SystemColors.Window;
+            dataGridViewCellStyle8.Font = new Font("Segoe UI", 25F);
+            dataGridViewCellStyle8.ForeColor = SystemColors.ControlText;
+            dataGridViewCellStyle8.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle8.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle8.WrapMode = DataGridViewTriState.False;
+            dataGridView3.DefaultCellStyle = dataGridViewCellStyle8;
+            dataGridView3.Enabled = false;
+            dataGridView3.Location = new Point(0, 0);
             dataGridView3.Name = "dataGridView3";
+            dataGridViewCellStyle9.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle9.BackColor = SystemColors.Control;
+            dataGridViewCellStyle9.Font = new Font("Segoe UI", 20F);
+            dataGridViewCellStyle9.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle9.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle9.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle9.WrapMode = DataGridViewTriState.True;
+            dataGridView3.RowHeadersDefaultCellStyle = dataGridViewCellStyle9;
+            dataGridView3.RowHeadersVisible = false;
             dataGridView3.RowHeadersWidth = 51;
             dataGridView3.RowTemplate.Height = 60;
-            dataGridView3.Size = new Size(1560, 735);
+            dataGridView3.Size = new Size(1560, 1015);
             dataGridView3.TabIndex = 0;
             // 
             // PROCESO
@@ -635,11 +683,11 @@
             PROCESO.MinimumWidth = 6;
             PROCESO.Name = "PROCESO";
             // 
-            // MEMORIA_USADA
+            // MEMORIA
             // 
-            MEMORIA_USADA.HeaderText = "MEMORIA_USADA";
-            MEMORIA_USADA.MinimumWidth = 6;
-            MEMORIA_USADA.Name = "MEMORIA_USADA";
+            MEMORIA.HeaderText = "MEMORIA";
+            MEMORIA.MinimumWidth = 6;
+            MEMORIA.Name = "MEMORIA";
             // 
             // RETORNO
             // 
@@ -664,7 +712,7 @@
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
-            ClientSize = new Size(1924, 753);
+            ClientSize = new Size(1902, 1033);
             Controls.Add(tabControl1);
             Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "Form1";
@@ -722,14 +770,15 @@
         private Button button6;
         private TabPage tabPage5;
         private DataGridView dataGridView3;
-        private DataGridViewTextBoxColumn PROCESO;
-        private DataGridViewTextBoxColumn MEMORIA_USADA;
-        private DataGridViewTextBoxColumn RETORNO;
-        private DataGridViewTextBoxColumn ESPERA;
-        private DataGridViewTextBoxColumn RESPUESTA;
         private Button button7;
         private Button button8;
         private Button button10;
         private Button button9;
+        private Button button11;
+        private DataGridViewTextBoxColumn PROCESO;
+        private DataGridViewTextBoxColumn MEMORIA;
+        private DataGridViewTextBoxColumn RETORNO;
+        private DataGridViewTextBoxColumn ESPERA;
+        private DataGridViewTextBoxColumn RESPUESTA;
     }
 }

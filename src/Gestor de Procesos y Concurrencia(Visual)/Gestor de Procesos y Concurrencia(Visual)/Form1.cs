@@ -11,6 +11,7 @@ namespace Gestor_de_Procesos_y_Concurrencia_Visual_
         public Form1()
         {
             InitializeComponent();
+            button9.Visible = false;
         }
         private int quantum;
         private int numeroProcesos;
@@ -21,8 +22,6 @@ namespace Gestor_de_Procesos_y_Concurrencia_Visual_
         private RoundRobin planificadorRoundRobin;
         Archivo Logs = new Archivo();
         Utilidades V = new Utilidades();
-        private int relojGlobal = 0;
-
 
         private void tabControl1_Selecting(object sender, TabControlCancelEventArgs e)
         {
@@ -107,9 +106,14 @@ namespace Gestor_de_Procesos_y_Concurrencia_Visual_
             dataGridView3.Rows.Clear();
 
             double sumaT = 0, sumaW = 0, sumaR = 0;
+            SqlConnection conexion = new SqlConnection("Server=LAPTOP-BS0QDBE1; Database=GestorProcesosDB; integrated security=true; TrustServerCertificate=True;");
 
-            string connectionString = "Server=LAPTOP-BS0QDBE1;Database=GestorProcesosDB;Trusted_Connection=True;";
+            string insertBasedeDatos = @"INSERT INTO HistoricoProcesos (ProcesoId, BurstTime, ArrivalTime, MemoriaKB, Turnaround, Espera, Respuesta)" +
+            @" VALUES (@ProcesoId, @BurstTime, @ArrivalTime, @MemoriaKB, @Turnaround, @Espera, @Respuesta)";
 
+
+            SqlCommand comandoSql = new SqlCommand(insertBasedeDatos, conexion);
+            conexion.Open();
             foreach (var p in listaProcesos)
             {
                 int turnaround = p.FinishTime - p.ArrivalTime;
@@ -127,24 +131,23 @@ namespace Gestor_de_Procesos_y_Concurrencia_Visual_
                     $"{espera} s",
                     $"{respuesta} s"
                 );
-
-                try
-                {
-                    SqlConnection conexion = new SqlConnection();
-                    string comando = $"INSERT INTO HistoricoProcesos (ProcesoId, BurstTime, ArrivalTime, MemoriaKB, Turnaround, Espera, Respuesta)" +
-                    $" VALUES ({p.Identificador}, {p.BurstTime}, {p.ArrivalTime}, {p.MemoriaUsada}, {turnaround}, {espera}, {respuesta})";
-                    SqlCommand comandoSql = new SqlCommand(comando, conexion);
-                    conexion.Open();
-                    comandoSql.ExecuteNonQuery();
-                    conexion.Close();
-                } catch { }
+                comandoSql.Parameters.AddWithValue("@ProcesoId", p.Identificador);
+                comandoSql.Parameters.AddWithValue("@BurstTime", p.BurstTime);
+                comandoSql.Parameters.AddWithValue("@ArrivalTime", p.ArrivalTime);
+                comandoSql.Parameters.AddWithValue("@MemoriaKB", p.MemoriaUsada);
+                comandoSql.Parameters.AddWithValue("@Turnaround", turnaround);
+                comandoSql.Parameters.AddWithValue("@Espera", espera);
+                comandoSql.Parameters.AddWithValue("@Respuesta", respuesta);
+                try { comandoSql.ExecuteNonQuery(); } catch { }
+                comandoSql.Parameters.Clear();
             }
-
+            conexion.Close();
+            double promMemoria = listaProcesos.Average(p => p.MemoriaUsada);
             double promT = sumaT / listaProcesos.Count;
             double promW = sumaW / listaProcesos.Count;
             double promR = sumaR / listaProcesos.Count;
 
-            dataGridView3.Rows.Add("PROMEDIOS", "-", $"{promT:F2} s", $"{promW:F2} s", $"{promR:F2} s");
+            dataGridView3.Rows.Add("PROMEDIOS", $"{promMemoria:F2} KB", $"{promT:F2} s", $"{promW:F2} s", $"{promR:F2} s");
             dataGridView3.Rows[dataGridView3.Rows.Count - 1].DefaultCellStyle.BackColor = Color.LightCyan;
         }
 
@@ -172,19 +175,22 @@ namespace Gestor_de_Procesos_y_Concurrencia_Visual_
             tabControl1.SelectedTab = tabPage5;
             cambioPermitido = false;
         }
-
-        private void button8_Click(object sender, EventArgs e)
-        {
-            Application.Exit();
-        }
-
         private void button7_Click(object sender, EventArgs e)
         {
+            numeroProcesos = 0;
+            quantum = 0;
+            contadorProcesos = 1;
+            label3.Text = "Proceso #1";
+            button9.Visible = true;
             cambioPermitido = true;
             tabControl1.SelectedTab = tabPage1;
             cambioPermitido = false;
         }
 
+        private void button8_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
         private void button9_Click(object sender, EventArgs e)
         {
             listaProcesos.Clear();
@@ -194,6 +200,12 @@ namespace Gestor_de_Procesos_y_Concurrencia_Visual_
         private void button10_Click(object sender, EventArgs e)
         {
             Application.Exit();
+        }
+
+        private void button11_Click(object sender, EventArgs e)
+        {
+            Form2 mostrarInformacion = new Form2();
+            mostrarInformacion.ShowDialog();
         }
     }
 }

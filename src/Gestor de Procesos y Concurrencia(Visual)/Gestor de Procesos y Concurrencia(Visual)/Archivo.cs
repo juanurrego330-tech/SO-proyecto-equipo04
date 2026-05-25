@@ -22,7 +22,7 @@ namespace Gestor_de_Procesos_y_Concurrencia_Visual_
                         sw.WriteLine(registro);
                     }
                 }
-                catch (Exception) { }
+                catch { }
             }
         }
 
@@ -33,7 +33,7 @@ namespace Gestor_de_Procesos_y_Concurrencia_Visual_
                 string rutaArchivo = Path.Combine(carpetaDescargas, "log_procesos.txt");
                 if(File.Exists(rutaArchivo)) File.Delete(rutaArchivo);
             }
-            catch (Exception) { }
+            catch { }
         }
     }
 }
