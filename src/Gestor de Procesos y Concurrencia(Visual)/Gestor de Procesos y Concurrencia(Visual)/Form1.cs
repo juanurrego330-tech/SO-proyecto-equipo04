@@ -204,6 +204,7 @@ namespace Gestor_de_Procesos_y_Concurrencia_Visual_
 
         private void button11_Click(object sender, EventArgs e)
         {
+
             Form2 mostrarInformacion = new Form2();
             mostrarInformacion.ShowDialog();
         }

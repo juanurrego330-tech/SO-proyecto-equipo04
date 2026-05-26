@@ -65,7 +65,7 @@
             dataGridView1.Columns.AddRange(new DataGridViewColumn[] { Column1, Column2, Column3, Column4, Column5, Column6, Column7, Column8, Column9 });
             dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = SystemColors.Window;
-            dataGridViewCellStyle2.Font = new Font("Segoe UI", 25F);
+            dataGridViewCellStyle2.Font = new Font("Segoe UI", 20F);
             dataGridViewCellStyle2.ForeColor = SystemColors.ControlText;
             dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
             dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
@@ -75,7 +75,7 @@
             dataGridView1.Name = "dataGridView1";
             dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = SystemColors.Control;
-            dataGridViewCellStyle3.Font = new Font("Segoe UI", 20F);
+            dataGridViewCellStyle3.Font = new Font("Segoe UI", 10F);
             dataGridViewCellStyle3.ForeColor = SystemColors.WindowText;
             dataGridViewCellStyle3.SelectionBackColor = SystemColors.Highlight;
             dataGridViewCellStyle3.SelectionForeColor = SystemColors.HighlightText;
@@ -83,6 +83,7 @@
             dataGridView1.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             dataGridView1.RowHeadersVisible = false;
             dataGridView1.RowHeadersWidth = 50;
+            dataGridView1.RowTemplate.Height = 60;
             dataGridView1.Size = new Size(1900, 1030);
             dataGridView1.TabIndex = 0;
             // 
@@ -95,48 +96,56 @@
             // 
             // Column2
             // 
+            Column2.FillWeight = 150F;
             Column2.HeaderText = "FECHA";
             Column2.MinimumWidth = 6;
             Column2.Name = "Column2";
             // 
             // Column3
             // 
+            Column3.FillWeight = 110F;
             Column3.HeaderText = "ID";
             Column3.MinimumWidth = 6;
             Column3.Name = "Column3";
             // 
             // Column4
             // 
+            Column4.FillWeight = 80F;
             Column4.HeaderText = "BURST";
             Column4.MinimumWidth = 6;
             Column4.Name = "Column4";
             // 
             // Column5
             // 
+            Column5.FillWeight = 80F;
             Column5.HeaderText = "ARRIVAL";
             Column5.MinimumWidth = 6;
             Column5.Name = "Column5";
             // 
             // Column6
             // 
+            Column6.FillWeight = 90F;
             Column6.HeaderText = "MEMORIA";
             Column6.MinimumWidth = 6;
             Column6.Name = "Column6";
             // 
             // Column7
             // 
+            Column7.FillWeight = 90F;
             Column7.HeaderText = "RETORNO";
             Column7.MinimumWidth = 6;
             Column7.Name = "Column7";
             // 
             // Column8
             // 
+            Column8.FillWeight = 90F;
             Column8.HeaderText = "ESPERA";
             Column8.MinimumWidth = 6;
             Column8.Name = "Column8";
             // 
             // Column9
             // 
+            Column9.FillWeight = 90F;
             Column9.HeaderText = "RESPUESTA";
             Column9.MinimumWidth = 6;
             Column9.Name = "Column9";

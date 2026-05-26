@@ -102,7 +102,7 @@
             label1.BackColor = Color.Transparent;
             label1.Font = new Font("Segoe UI", 35F);
             label1.ForeColor = Color.Black;
-            label1.Location = new Point(259, 435);
+            label1.Location = new Point(265, 436);
             label1.Name = "label1";
             label1.Size = new Size(851, 78);
             label1.TabIndex = 0;
@@ -115,7 +115,7 @@
             label2.BackColor = Color.Transparent;
             label2.Font = new Font("Segoe UI", 35F);
             label2.ForeColor = Color.Black;
-            label2.Location = new Point(311, 513);
+            label2.Location = new Point(317, 514);
             label2.Name = "label2";
             label2.Size = new Size(799, 78);
             label2.TabIndex = 1;
@@ -126,7 +126,7 @@
             textBox1.Anchor = AnchorStyles.None;
             textBox1.BorderStyle = BorderStyle.FixedSingle;
             textBox1.Font = new Font("Segoe UI", 25F);
-            textBox1.Location = new Point(1099, 449);
+            textBox1.Location = new Point(1105, 450);
             textBox1.MaxLength = 4;
             textBox1.Name = "textBox1";
             textBox1.Size = new Size(102, 63);
@@ -137,7 +137,7 @@
             textBox2.Anchor = AnchorStyles.None;
             textBox2.BorderStyle = BorderStyle.FixedSingle;
             textBox2.Font = new Font("Segoe UI", 25F);
-            textBox2.Location = new Point(1099, 527);
+            textBox2.Location = new Point(1105, 528);
             textBox2.MaxLength = 4;
             textBox2.Name = "textBox2";
             textBox2.Size = new Size(102, 63);
@@ -149,7 +149,7 @@
             button1.BackColor = Color.White;
             button1.FlatStyle = FlatStyle.Flat;
             button1.Font = new Font("Segoe UI", 18F);
-            button1.Location = new Point(1027, 647);
+            button1.Location = new Point(1033, 648);
             button1.Name = "button1";
             button1.Size = new Size(225, 83);
             button1.TabIndex = 2;
@@ -159,24 +159,25 @@
             // 
             // tabControl1
             // 
+            tabControl1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             tabControl1.Controls.Add(tabPage1);
             tabControl1.Controls.Add(tabPage2);
             tabControl1.Controls.Add(tabPage3);
             tabControl1.Controls.Add(tabPage4);
             tabControl1.Controls.Add(tabPage5);
-            tabControl1.Dock = DockStyle.Fill;
-            tabControl1.ItemSize = new Size(0, 10);
-            tabControl1.Location = new Point(0, 0);
+            tabControl1.ItemSize = new Size(0, 1);
+            tabControl1.Location = new Point(-6, -4);
             tabControl1.Name = "tabControl1";
+            tabControl1.Padding = new Point(0, 0);
             tabControl1.SelectedIndex = 0;
-            tabControl1.Size = new Size(1902, 1033);
-            tabControl1.SizeMode = TabSizeMode.FillToRight;
+            tabControl1.Size = new Size(1915, 1049);
+            tabControl1.SizeMode = TabSizeMode.Fixed;
             tabControl1.TabIndex = 0;
             tabControl1.Selecting += tabControl1_Selecting;
             // 
             // tabPage1
             // 
-            tabPage1.BackColor = Color.Transparent;
+            tabPage1.BackColor = Color.Silver;
             tabPage1.BackgroundImage = (Image)resources.GetObject("tabPage1.BackgroundImage");
             tabPage1.BackgroundImageLayout = ImageLayout.Stretch;
             tabPage1.Controls.Add(button11);
@@ -188,10 +189,10 @@
             tabPage1.Controls.Add(button1);
             tabPage1.Controls.Add(label2);
             tabPage1.Font = new Font("Segoe UI", 9F);
-            tabPage1.Location = new Point(4, 14);
+            tabPage1.Location = new Point(4, 5);
             tabPage1.Name = "tabPage1";
             tabPage1.Padding = new Padding(3);
-            tabPage1.Size = new Size(1894, 1015);
+            tabPage1.Size = new Size(1907, 1037);
             tabPage1.TabIndex = 0;
             tabPage1.Text = "Inicio";
             // 
@@ -202,7 +203,7 @@
             button11.FlatStyle = FlatStyle.Flat;
             button11.Font = new Font("Segoe UI", 15F);
             button11.ForeColor = Color.Black;
-            button11.Location = new Point(1449, 663);
+            button11.Location = new Point(1455, 664);
             button11.Name = "button11";
             button11.Size = new Size(271, 83);
             button11.TabIndex = 5;
@@ -216,7 +217,7 @@
             button10.BackColor = Color.White;
             button10.FlatStyle = FlatStyle.Flat;
             button10.Font = new Font("Segoe UI", 18F);
-            button10.Location = new Point(1027, 752);
+            button10.Location = new Point(1033, 753);
             button10.Name = "button10";
             button10.Size = new Size(225, 83);
             button10.TabIndex = 4;
@@ -227,23 +228,22 @@
             // button9
             // 
             button9.Anchor = AnchorStyles.None;
-            button9.BackColor = Color.White;
+            button9.BackColor = Color.OrangeRed;
             button9.FlatStyle = FlatStyle.Flat;
             button9.Font = new Font("Segoe UI", 15F);
             button9.ForeColor = Color.Black;
-            button9.Location = new Point(1449, 752);
+            button9.Location = new Point(1455, 753);
             button9.Name = "button9";
             button9.Size = new Size(271, 83);
             button9.TabIndex = 3;
-            button9.Text = "BORRAR PROCESOS ANTERIORES";
+            button9.Text = "LIMPIAR TABLA SIMULACION";
             button9.UseVisualStyleBackColor = false;
             button9.Click += button9_Click;
             // 
             // tabPage2
             // 
-            tabPage2.BackColor = Color.White;
+            tabPage2.BackColor = Color.Black;
             tabPage2.BackgroundImage = (Image)resources.GetObject("tabPage2.BackgroundImage");
-            tabPage2.BackgroundImageLayout = ImageLayout.Zoom;
             tabPage2.Controls.Add(button5);
             tabPage2.Controls.Add(textBox5);
             tabPage2.Controls.Add(textBox4);
@@ -253,10 +253,10 @@
             tabPage2.Controls.Add(label5);
             tabPage2.Controls.Add(label4);
             tabPage2.Controls.Add(label3);
-            tabPage2.Location = new Point(4, 14);
+            tabPage2.Location = new Point(4, 5);
             tabPage2.Name = "tabPage2";
             tabPage2.Padding = new Padding(3);
-            tabPage2.Size = new Size(1894, 1015);
+            tabPage2.Size = new Size(1907, 1040);
             tabPage2.TabIndex = 1;
             tabPage2.Text = "Ingreso Datos";
             // 
@@ -266,7 +266,7 @@
             button5.BackColor = Color.White;
             button5.FlatStyle = FlatStyle.Flat;
             button5.Font = new Font("Segoe UI", 18F);
-            button5.Location = new Point(858, 709);
+            button5.Location = new Point(858, 716);
             button5.Name = "button5";
             button5.Size = new Size(171, 68);
             button5.TabIndex = 10;
@@ -279,7 +279,7 @@
             textBox5.Anchor = AnchorStyles.None;
             textBox5.BorderStyle = BorderStyle.FixedSingle;
             textBox5.Font = new Font("Segoe UI", 25F);
-            textBox5.Location = new Point(847, 538);
+            textBox5.Location = new Point(847, 545);
             textBox5.MaxLength = 8;
             textBox5.Name = "textBox5";
             textBox5.Size = new Size(196, 63);
@@ -290,7 +290,7 @@
             textBox4.Anchor = AnchorStyles.None;
             textBox4.BorderStyle = BorderStyle.FixedSingle;
             textBox4.Font = new Font("Segoe UI", 25F);
-            textBox4.Location = new Point(847, 458);
+            textBox4.Location = new Point(847, 465);
             textBox4.MaxLength = 8;
             textBox4.Name = "textBox4";
             textBox4.Size = new Size(196, 63);
@@ -301,8 +301,8 @@
             textBox3.Anchor = AnchorStyles.None;
             textBox3.BorderStyle = BorderStyle.FixedSingle;
             textBox3.Font = new Font("Segoe UI", 25F);
-            textBox3.Location = new Point(847, 380);
-            textBox3.MaxLength = 11;
+            textBox3.Location = new Point(847, 387);
+            textBox3.MaxLength = 9;
             textBox3.Name = "textBox3";
             textBox3.Size = new Size(270, 63);
             textBox3.TabIndex = 6;
@@ -313,7 +313,7 @@
             button2.BackColor = Color.White;
             button2.FlatStyle = FlatStyle.Flat;
             button2.Font = new Font("Segoe UI", 18F);
-            button2.Location = new Point(858, 635);
+            button2.Location = new Point(858, 642);
             button2.Name = "button2";
             button2.Size = new Size(171, 68);
             button2.TabIndex = 9;
@@ -325,10 +325,10 @@
             // 
             label6.Anchor = AnchorStyles.None;
             label6.AutoSize = true;
-            label6.BackColor = Color.White;
+            label6.BackColor = Color.Transparent;
             label6.Font = new Font("Segoe UI", 40F);
-            label6.ForeColor = Color.Black;
-            label6.Location = new Point(487, 515);
+            label6.ForeColor = Color.White;
+            label6.Location = new Point(487, 522);
             label6.Name = "label6";
             label6.Size = new Size(365, 89);
             label6.TabIndex = 3;
@@ -338,10 +338,10 @@
             // 
             label5.Anchor = AnchorStyles.None;
             label5.AutoSize = true;
-            label5.BackColor = Color.White;
+            label5.BackColor = Color.Transparent;
             label5.Font = new Font("Segoe UI", 40F);
-            label5.ForeColor = Color.Black;
-            label5.Location = new Point(450, 435);
+            label5.ForeColor = Color.White;
+            label5.Location = new Point(450, 442);
             label5.Name = "label5";
             label5.Size = new Size(402, 89);
             label5.TabIndex = 2;
@@ -351,10 +351,10 @@
             // 
             label4.Anchor = AnchorStyles.None;
             label4.AutoSize = true;
-            label4.BackColor = Color.White;
+            label4.BackColor = Color.Transparent;
             label4.Font = new Font("Segoe UI", 40F);
-            label4.ForeColor = Color.Black;
-            label4.Location = new Point(734, 357);
+            label4.ForeColor = Color.White;
+            label4.Location = new Point(734, 364);
             label4.Name = "label4";
             label4.Size = new Size(118, 89);
             label4.TabIndex = 1;
@@ -366,8 +366,8 @@
             label3.AutoSize = true;
             label3.BackColor = Color.Transparent;
             label3.Font = new Font("Segoe UI", 40F);
-            label3.ForeColor = Color.Black;
-            label3.Location = new Point(487, 268);
+            label3.ForeColor = Color.White;
+            label3.Location = new Point(487, 275);
             label3.Name = "label3";
             label3.Size = new Size(365, 89);
             label3.TabIndex = 0;
@@ -380,9 +380,9 @@
             tabPage3.BackgroundImageLayout = ImageLayout.Stretch;
             tabPage3.Controls.Add(button3);
             tabPage3.Controls.Add(dataGridView1);
-            tabPage3.Location = new Point(4, 14);
+            tabPage3.Location = new Point(4, 5);
             tabPage3.Name = "tabPage3";
-            tabPage3.Size = new Size(1894, 1015);
+            tabPage3.Size = new Size(1907, 1037);
             tabPage3.TabIndex = 2;
             tabPage3.Text = "Datos Ingresados";
             // 
@@ -439,7 +439,7 @@
             dataGridView1.RowHeadersVisible = false;
             dataGridView1.RowHeadersWidth = 50;
             dataGridView1.RowTemplate.Height = 60;
-            dataGridView1.Size = new Size(1560, 1015);
+            dataGridView1.Size = new Size(1559, 1015);
             dataGridView1.TabIndex = 0;
             // 
             // Column1
@@ -478,9 +478,9 @@
             tabPage4.Controls.Add(button6);
             tabPage4.Controls.Add(button4);
             tabPage4.Controls.Add(dataGridView2);
-            tabPage4.Location = new Point(4, 14);
+            tabPage4.Location = new Point(4, 5);
             tabPage4.Name = "tabPage4";
-            tabPage4.Size = new Size(1894, 1015);
+            tabPage4.Size = new Size(1907, 1037);
             tabPage4.TabIndex = 3;
             tabPage4.Text = "Ejecucion";
             // 
@@ -551,7 +551,7 @@
             dataGridView2.RowHeadersVisible = false;
             dataGridView2.RowHeadersWidth = 51;
             dataGridView2.RowTemplate.Height = 60;
-            dataGridView2.Size = new Size(1560, 1015);
+            dataGridView2.Size = new Size(1559, 1015);
             dataGridView2.TabIndex = 0;
             // 
             // Column5
@@ -600,9 +600,9 @@
             tabPage5.Controls.Add(button8);
             tabPage5.Controls.Add(button7);
             tabPage5.Controls.Add(dataGridView3);
-            tabPage5.Location = new Point(4, 14);
+            tabPage5.Location = new Point(4, 5);
             tabPage5.Name = "tabPage5";
-            tabPage5.Size = new Size(1894, 1015);
+            tabPage5.Size = new Size(1907, 1037);
             tabPage5.TabIndex = 4;
             tabPage5.Text = "Resultados";
             tabPage5.UseVisualStyleBackColor = true;
@@ -674,7 +674,7 @@
             dataGridView3.RowHeadersVisible = false;
             dataGridView3.RowHeadersWidth = 51;
             dataGridView3.RowTemplate.Height = 60;
-            dataGridView3.Size = new Size(1560, 1015);
+            dataGridView3.Size = new Size(1559, 1015);
             dataGridView3.TabIndex = 0;
             // 
             // PROCESO
@@ -714,6 +714,7 @@
             BackColor = Color.White;
             ClientSize = new Size(1902, 1033);
             Controls.Add(tabControl1);
+            FormBorderStyle = FormBorderStyle.Fixed3D;
             Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "Form1";
             Text = "Gestor de Procesos y Concurrencia";
