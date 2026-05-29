@@ -1,0 +1,29 @@
+PROPUESTA DE PROYECTO: SIMULADOR DE GESTIÓN DE PROCESOS Y CONCURRENCIA
+1. Introducción
+En el ámbito de los sistemas operativos, la planificación de CPU es uno de los pilares fundamentales para lograr la multiprogramación y la eficiencia en el uso del hardware. Este proyecto consiste en el diseño y desarrollo de un Simulador de Gestión de Procesos y Concurrencia basado en el algoritmo de planificación Round Robin (RR) con asignación de tiempo de ráfaga (Time-Slicing). La aplicación se concibe como una herramienta de software de escritorio que modela el comportamiento real de un sistema operativo al administrar la ejecución concurrente de múltiples tareas, la asignación de memoria y el cálculo de métricas de rendimiento en tiempo real.
+
+2. Objetivos
+Objetivo General
+Desarrollar un software simulador en C# utilizando Windows Forms que modele de forma visual y lógica la planificación de procesos mediante el algoritmo Round Robin, aplicando conceptos avanzados de multihilo, sincronización de memoria y persistencia de datos.
+
+Objetivos Específicos
+Implementar un motor de simulación concurrente donde cada proceso cargado sea representado y controlado a través de un hilo (Thread) independiente.
+
+Diseñar una interfaz gráfica reactiva que permita la inserción dinámica de procesos (ID, Arrival Time, Burst Time) y muestre los logs de ejecución de forma cronológica sin bloquear la pantalla principal.
+
+Calcular matemáticamente y con precisión las métricas estándar de sistemas operativos: Tiempo de Retorno (Turnaround Time), Tiempo de Espera (Waiting Time) y Tiempo de Respuesta (Response Time), incluyendo promedios generales y consumo de memoria.
+
+Integrar un módulo de persistencia relacional utilizando SQL Server para almacenar de forma masiva y segura el histórico de las simulaciones ejecutadas para su posterior auditoría.
+
+3. Justificación
+Comprender cómo un sistema operativo gestiona el tiempo de CPU y previene los bloqueos mutuos (deadlocks) suele ser un reto teórico complejo. Este simulador se justifica como una solución práctica y didáctica para visualizar cómo interactúan las colas de listos y de ejecución bajo un esquema de Round Robin con ráfagas controladas. Al desarrollarse bajo la arquitectura .NET Core y C#, el proyecto pone a prueba la correcta implementación de exclusión mutua, delegados para la actualización de la interfaz gráfica (UI) desde hilos secundarios, y la optimización de recursos de hardware en entornos con limitaciones físicas de procesamiento y RAM.
+
+4. Alcance del Proyecto
+El sistema final consta de tres módulos o fases completamente funcionales:
+
+Módulo de Entrada de Datos: Interfaz intuitiva con validación de datos para la creación de procesos individuales, capturando su identificador único, tiempo de
+llegada y tiempo de ráfaga requerido.
+
+Módulo de Simulación Dinámica: Simulación en tiempo real basada en un Quantum determinado. El sistema reflejará visualmente el avance de la CPU, las interrupciones por fin de ráfaga y la rotación cíclica de la cola de procesos.
+
+Módulo de Estadísticas e Histórico: Al finalizar la ejecución, el software inyectará en bloque los resultados calculados a una base de datos relacional local (SQL Server) y generará una tabla resumen con los promedios globales de tiempos y memoria utilizada.
