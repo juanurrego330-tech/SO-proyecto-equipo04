@@ -29,6 +29,7 @@ Dependencias:
 - System.Collections.Generic  
 - System.Threading
 - System.Linq
+- Microsoft.Data.SqlClient
 
 No requiere librerías externas.
 
@@ -81,3 +82,16 @@ No funciona / No implementado aún:
 - Procesos en estado BLOCKED (no hay simulación de I/O ni esperas intermedias).
 - Interfaz gráfica.
 - Persistencia de datos (los resultados no se guardan en archivo ni base de datos).
+
+- ### Qué funciona y qué no — Tercera Entrega (Entrega Final)
+
+Funciona:
+- **Interfaz Gráfica Avanzada (GUI):** Implementación completa en Windows Forms con un diseño oscuro (Dark Mode) estructurado mediante pestañas (`TabControl`) y tablas dinámicas (`DataGridView`).
+- **Mapeo de Datos en Tiempo Real:** Visualización asíncrona del ciclo de vida de los hilos, mostrando estados, ráfagas, tiempos de llegada y barra de porcentaje de CPU sin congelar la pantalla.
+- **Persistencia Relacional:** Conexión directa a base de datos local (`SQL Server`) mediante ADO.NET (`SqlConnection`, `SqlCommand`, `SqlDataReader`) para almacenar el histórico masivo de ejecuciones de forma permanente.
+- **Módulo de Historial Personalizado:** Pantalla de auditoría interna que lee la base de datos fila por fila usando un ciclo optimizado, inyectando los datos con formato legible para el usuario (`KB` para memoria, `s` para tiempos).
+- **Simulación Completa de Recursos:** Inclusión de la métrica de consumo de Memoria (KB) asignada dinámicamente por proceso, integrada en el cálculo de promedios globales.
+- **Control de Flujo:** Botones funcionales para limpiar tablas de simulación activa, reiniciar parámetros, navegar entre formularios y cerrar la aplicación de manera segura.
+
+No funciona / No implementado aún:
+- Procesos en estado BLOCKED (Se decidio no implementarlo).
